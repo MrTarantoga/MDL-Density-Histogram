@@ -14,6 +14,11 @@ This package provides a Cython-accelerated implementation of the **Minimum Descr
 - **Cython Acceleration**: Critical path operations compiled to C
 
 ## Installation
+You can install the package using pip:
+```bash
+pip install MDL-Density-Histogram
+```
+Alternatively, you can install it from source by cloning the repository and running:
 ```bash
 # From project root directory
 pip install .
