@@ -4,14 +4,12 @@
 
 This package provides a Cython-accelerated implementation of the **Minimum Description Length (MDL) optimal histogram density estimation** algorithm from Kontkanen & Myllymaki (2007). It uses information-theoretic principles to automatically determine optimal variable-width bins for density estimation.
 
-![Example Histogram](docs/gm6_example.png)
-
 ## Features
 - **MDL Principle**: Uses stochastic complexity for model selection
-- **Dynamic Programming**: Efficient O(E²·K_max) optimization
+- **Dynamic Programming**: Efficient O(E²·K_max) optimization (cache parametric complexity computation, speed up)
 - **Variable-Width Bins**: Adapts to data density variations
-- **Automatic Bin Count**: No manual parameter tuning required
-- **Cython Acceleration**: Critical path operations compiled to C
+- **Automatic Bin Count**: No manual parameter tuning required (except maximum bin count to consider $K_{max}$ and data resolution $\epsilon$)
+- **Cython Acceleration**: Critical operations compiled to C
 
 ## Installation
 You can install the package using pip:
