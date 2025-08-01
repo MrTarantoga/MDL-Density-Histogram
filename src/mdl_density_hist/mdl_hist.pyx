@@ -9,7 +9,7 @@ from libc.math cimport floor, log, INFINITY, exp
 
 cdef const double PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062
 
-cdef double log_fac_by_Ramanujan(const unsigned long n):  
+cdef double log_fac_by_Ramanujan(const unsigned long long n):  
     assert n >= 0, "N is only allowed to be [0, inf)"
     cdef double term_1, term_2, term_3, result
 
@@ -56,7 +56,7 @@ def generate_candidate_cut_points(double [:] x, double epsilon):
 
     return candidates
 
-cpdef unsigned long[:] precompute_n_e(double [:] data, double [:] candidates):
+cpdef unsigned long long[:] precompute_n_e(double [:] data, double [:] candidates):
     """Precompute n_e: number of data points in [x_min, c_e] (Section 4)"""
     n_e = np.zeros(len(candidates), dtype=np.uint64)  # Include E+1
     cdef Py_ssize_t i, d
@@ -69,11 +69,11 @@ cpdef unsigned long[:] precompute_n_e(double [:] data, double [:] candidates):
                 n_e[i] += 1
     return n_e
 
-cdef double compute_parametric_complexity(unsigned long n, unsigned long K):
+cdef double compute_parametric_complexity(unsigned long long n, unsigned long long K):
     cdef double R_prev2 = 1.0  # R_n_h(K-2)
     cdef double R_current = 0.0  # R_n_h(K)
     cdef double R_prev1 = 0.0  # R_n_h(K-1)
-    cdef unsigned long h2, h1, k
+    cdef unsigned long long h2, h1, k
     cdef double term_1, term_2, term_3
     cdef double log_n = log(n)
     
@@ -107,14 +107,14 @@ cdef double compute_parametric_complexity(unsigned long n, unsigned long K):
 
     return R_current
 
-cdef double dp_func_init(unsigned long [:] n_e, 
+cdef double dp_func_init(unsigned long long [:] n_e, 
                          double [:] x, 
-                         unsigned long n, 
+                         unsigned long long n, 
                          double [:] candidates, 
-                         unsigned long e, 
+                         unsigned long long e, 
                          double epsilon):
     cdef double term1, term2, best_score, candidates_val, x_min
-    cdef unsigned long n_e_val = <unsigned long>n_e[e]
+    cdef unsigned long long n_e_val = <unsigned long long>n_e[e]
 
     if n_e_val != 0:
         candidates_val = <double>candidates[e]
@@ -127,20 +127,20 @@ cdef double dp_func_init(unsigned long [:] n_e,
     else:
         return 0.0
 
-cdef tuple dp_func(unsigned long [:] n_e, 
+cdef tuple dp_func(unsigned long long [:] n_e, 
                    double [:] x, 
-                   const unsigned long n, 
+                   const unsigned long long n, 
                    double [:] candidates, 
-                   const unsigned long K, 
-                   const unsigned long E, 
-                   const unsigned long e, 
+                   const unsigned long long K, 
+                   const unsigned long long E, 
+                   const unsigned long long e, 
                    const double epsilon, 
                    double[:, :] DP_table,
-                   dict[tuple[unsigned long, unsigned long], double] cache):
+                   dict[tuple[unsigned long long, unsigned long long], double] cache):
     cdef double e_prime_best_score = INFINITY
     cdef double best_score = INFINITY
-    cdef unsigned long e_prime
-    cdef unsigned long n_k
+    cdef unsigned long long e_prime
+    cdef unsigned long long n_k
     cdef double bin_width
     cdef double term1, term2, term3, score
     cdef double R, R_prime
@@ -179,17 +179,17 @@ cdef tuple dp_func(unsigned long [:] n_e,
     return (e_prime_best_score, best_score)
 
 
-cdef const unsigned long MAX_K_MAX_IF_UNDEFINED = 50
+cdef const unsigned long long MAX_K_MAX_IF_UNDEFINED = 50
 def mdl_optimal_histogram(double [:] data, 
                           double epsilon=0.1, 
-                          int K_max=-1):
+                          long long K_max=-1):
     cdef double[:] data_view = data
-    cdef unsigned long n = data_view.shape[0]
-    cdef unsigned long i
-    cdef unsigned long K, e, K_best, e_pos, _K_max
+    cdef unsigned long long n = data_view.shape[0]
+    cdef unsigned long long i
+    cdef unsigned long long K, e, K_best, e_pos, _K_max
     cdef double[:] candidates
-    cdef unsigned long[:] n_e
-    cdef unsigned long E
+    cdef unsigned long long[:] n_e
+    cdef unsigned long long E
     cdef double[:, :] dp_table_score
     cdef int[:, :] dp_table_e_prime
     cdef double best_score
@@ -200,7 +200,7 @@ def mdl_optimal_histogram(double [:] data,
     assert epsilon > 0, "The epsilon must be positive"
 
     # Step 0: Create lookup dictionary for parametric compute_parametric_complexity
-    cdef dict[tuple[unsigned long, unsigned long], double] cpc_cache = {}
+    cdef dict[tuple[unsigned long long, unsigned long long], double] cpc_cache = {}
 
     # Step 1: Quantize data
     data = quantize_data(data, epsilon)
@@ -220,7 +220,7 @@ def mdl_optimal_histogram(double [:] data,
             _K_max = MAX_K_MAX_IF_UNDEFINED
     else:
         assert K_max > 1, "K_max must be [2, inf)"
-        _K_max = <unsigned long>K_max
+        _K_max = <unsigned long long>K_max
 
     # Step 5: Initialize DP tables
     dp_table_score = np.full((_K_max + 1, E + 1), INFINITY, dtype=np.float64)
