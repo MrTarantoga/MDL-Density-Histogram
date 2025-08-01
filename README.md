@@ -1,4 +1,5 @@
 [![Upload Python Package](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-publish.yml/badge.svg?event=release)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-publish.yml)
+[![Python application test](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app.yml/badge.svg)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app.yml)
 
 # MDL Optimal Histogram Density Estimation
 
