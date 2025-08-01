@@ -6,8 +6,6 @@ name: Python application bad runner
 on:
   push:
     branches: [ "**" ]
-  pull_request:
-    branches: [ "**" ]
 
 permissions:
   contents: read
