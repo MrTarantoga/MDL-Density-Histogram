@@ -52,10 +52,8 @@ plt.show()
 - `K_max`: Maximum number of bins (default: min(n, 50))
 
 ## Algorithm Highlights
-- Implements **Equation 22** for candidate cut point generation
 - Uses **Ramanujan's factorial approximation** for efficient parametric complexity
-- Dynamic programming table optimization with caching
-- Handles edge cases through implicit boundary conditions
+- Chache parameteric complexity to speed up computation.
 
 ## Paper Citation
 Kontkanen, P., & Myllymäki, P. (2007).  
@@ -81,8 +79,6 @@ src/
 - Candidate cut point pruning for reduced search space
 
 ## Future Work
-- Add support for multidimensional histograms
-- Implement Bayesian Information Criterion (BIC) comparison
 - Add visualization tools for complexity curves
 
 For implementation details, see the [paper](https://proceedings.mlr.press/v2/kontkanen07a/kontkanen07a.pdf) and inline code comments.
