@@ -1,0 +1,2 @@
+*.parquet.brotli filter=lfs diff=lfs merge=lfs -text
+tests/*.parquet.brotli filter=lfs diff=lfs merge=lfs -text
