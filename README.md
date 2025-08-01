@@ -31,7 +31,7 @@ Requires:
 ## Usage Example
 ```python
 import numpy as np
-from mdl_density_hist.mdl_hist import mdl_optimal_histogram
+from mdl_density_hist import mdl_optimal_histogram
 
 # Generate sample data
 data = np.random.normal(0, 1, 1000)
