@@ -12,6 +12,14 @@ authors = [
 license = {text = "Apache-2.0"}
 readme = "README.md"
 
+[project.optional-dependencies]
+tests = [
+    "pytest",
+    "pytest-xdist",
+    "pandas",
+    "pyarrow",
+    "brotli"
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
