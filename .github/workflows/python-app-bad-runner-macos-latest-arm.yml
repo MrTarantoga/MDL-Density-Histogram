@@ -27,4 +27,4 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests"
           CIBW_SKIP: >-
-            cp38-* cp39-* cp310-* cp314-* *win32*
+            cp38-* cp39-* cp310-* cp314-* cp314t-* *win32*
