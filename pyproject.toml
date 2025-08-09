@@ -5,12 +5,19 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "MDL-Density-Histogram"
 version = "0.2.1"
+requires-python = ">= 3.11"
 description = "Cython-accelerated MDL histogram density estimation with dynamic programming, implementing Kontkanen & Myllymaki's algorithm (JMLR 2007)."
 authors = [
     {name = "Götz Grimmer", email = "goetz-dev@web.de"}
 ]
+maintainers = [
+    {name = "Götz Grimmer", email = "goetz-dev@web.de"}
+]
 license = {text = "Apache-2.0"}
 readme = "README.md"
+
+[project.urls]
+Repository = "https://github.com/MrTarantoga/MDL-Density-Histogram"
 
 [project.optional-dependencies]
 tests = [
