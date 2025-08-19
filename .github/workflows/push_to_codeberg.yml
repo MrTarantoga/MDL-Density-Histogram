@@ -1,0 +1,16 @@
+name: Push GitHub to Codeberg
+
+on: [push]
+
+jobs:
+  push_to_docker_hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: yesolutions/mirror-action@master
+        with:
+          REMOTE: 'https://codeberg.org/MrTarantoga/MDL-Density-Histogram.git'
+          GIT_USERNAME: MrTarantoga
+          GIT_PASSWORD: ${{ secrets.CODEBERG_PASSWORD }}
