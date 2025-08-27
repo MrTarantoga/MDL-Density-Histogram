@@ -62,7 +62,7 @@ plt.show()
 ## Paper Citation
 Kontkanen, P., & Myllymäki, P. (2007).  
 *MDL Histogram Density Estimation*  
-Journal of Machine Learning Research 8 (2007) 2007-2038  
+Journal of Machine Learning Research 8 (2007)
 [PDF](https://proceedings.mlr.press/v2/kontkanen07a/kontkanen07a.pdf)
 
 ## License
