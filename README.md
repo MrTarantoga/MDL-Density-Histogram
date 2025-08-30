@@ -57,7 +57,7 @@ plt.show()
 
 ## Algorithm Highlights
 - Uses **Ramanujan's factorial approximation** for efficient parametric complexity
-- Chache parameteric complexity to speed up computation.
+- Cache parameteric complexity to speed up computation
 
 ## Paper Citation
 Kontkanen, P., & Myllymäki, P. (2007).  
