@@ -3,6 +3,7 @@
 # cython: wraparound=False
 # cython: nonecheck=False
 # cython: binding=False
+# cython: cdivision=True
 
 import numpy as np
 cimport cython
