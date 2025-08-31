@@ -2,6 +2,7 @@
 # cython: boundscheck=False
 # cython: wraparound=False
 # cython: nonecheck=False
+# cython: binding=False
 
 import numpy as np
 cimport cython
