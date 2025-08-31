@@ -6,7 +6,7 @@
 
 This package provides a Cython-accelerated implementation of the **Minimum Description Length (MDL) optimal histogram density estimation** algorithm from Kontkanen & Myllymaki (2007). It uses information-theoretic principles to automatically determine optimal variable-width bins for density estimation.
 
-![Freedman-Diaconis vs. MDL-Optimization](https://github.com/MrTarantoga/MDL-Density-Histogram/blob/main/gmm5_idx_3.png)
+![Freedman-Diaconis vs. MDL-Optimization](https://raw.githubusercontent.com/MrTarantoga/MDL-Density-Histogram/main/gmm5_idx_3.png)
 
 ## Features
 - **MDL Principle**: Uses stochastic complexity for model selection
