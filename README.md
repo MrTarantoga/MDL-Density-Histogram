@@ -53,7 +53,7 @@ plt.show()
 ## Parameters
 - `data`: Input array (1D numpy array)
 - `epsilon`: Quantization precision (default: 0.1)
-- `K_max`: Maximum number of bins (default: min(n, 50))
+- `K_max`: Maximum number of bins (default: 10)
 
 ## Algorithm Highlights
 - Uses **Ramanujan's factorial approximation** for efficient parametric complexity
