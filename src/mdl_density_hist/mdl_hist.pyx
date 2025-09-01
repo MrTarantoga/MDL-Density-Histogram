@@ -181,14 +181,14 @@ cdef tuple dp_func(unsigned long long [:] n_e,
     return (e_prime_best_score, best_score)
 
 
-cdef const unsigned long long MAX_K_MAX_IF_UNDEFINED = 50
+
 def mdl_optimal_histogram(double [:] data, 
                           double epsilon=0.1, 
-                          long long K_max=-1):
+                          unsigned long long K_max=10):
     cdef double[:] data_view = data
     cdef unsigned long long n = data_view.shape[0]
     cdef unsigned long long i
-    cdef unsigned long long K, e, K_best, e_pos, _K_max
+    cdef unsigned long long K, e, K_best, e_pos,
     cdef double[:] candidates
     cdef unsigned long long[:] n_e
     cdef unsigned long long E
@@ -214,26 +214,18 @@ def mdl_optimal_histogram(double [:] data,
     # Step 4: Precompute n_e
     n_e = precompute_n_e(data, candidates)
 
-    # Set default K_max
-    if K_max == -1:
-        if n < MAX_K_MAX_IF_UNDEFINED:
-            _K_max = n 
-        else:
-            _K_max = MAX_K_MAX_IF_UNDEFINED
-    else:
-        assert K_max > 1, "K_max must be [2, inf)"
-        _K_max = <unsigned long long>K_max
+    assert K_max > 1, "K_max must be [2, inf)"
 
     # Step 5: Initialize DP tables
-    dp_table_score = np.full((_K_max + 1, E + 1), INFINITY, dtype=np.float64)
-    dp_table_e_prime = np.full((_K_max + 1, E + 1), -1, dtype=np.int32)
+    dp_table_score = np.full((K_max + 1, E + 1), INFINITY, dtype=np.float64)
+    dp_table_e_prime = np.full((K_max + 1, E + 1), -1, dtype=np.int32)
 
     # Initialize DP table for K=0
     for e in range(E + 1):
         dp_table_score[0, e] = dp_func_init(n_e, data, n, candidates, e, epsilon)
 
     # Fill DP table for K >= 1
-    for K in range(1, _K_max + 1):
+    for K in range(1, K_max + 1):
         for e in range(K, E + 1):
             dp_table_e_prime[K, e], dp_table_score[K, e] = dp_func(
                 n_e, data, n, candidates, K, E, e, epsilon, dp_table_score, cpc_cache
@@ -242,7 +234,7 @@ def mdl_optimal_histogram(double [:] data,
     # Find best K
     K_best = 0
     best_score = dp_table_score[0, E]
-    for K in range(1, _K_max + 1):
+    for K in range(1, K_max + 1):
         if dp_table_score[K, E] < best_score:
             best_score = dp_table_score[K, E]
             K_best = K
