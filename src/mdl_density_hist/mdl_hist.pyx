@@ -186,6 +186,7 @@ def mdl_optimal_histogram(double [:] data,
                           double epsilon=0.1, 
                           unsigned long long K_max=10):
     cdef double[:] data_view = data
+    cdef double[:] K_scores
     cdef unsigned long long n = data_view.shape[0]
     cdef unsigned long long i
     cdef unsigned long long K, e, K_best, e_pos,
@@ -233,6 +234,8 @@ def mdl_optimal_histogram(double [:] data,
 
     # Find best K
     K_best = 0
+    K_scores = dp_table_score[:, E]
+
     best_score = dp_table_score[0, E]
     for K in range(1, K_max + 1):
         if dp_table_score[K, E] < best_score:
@@ -250,4 +253,4 @@ def mdl_optimal_histogram(double [:] data,
     optimal_cut_points.append(np.min(data))
     optimal_cut_points.sort()
 
-    return np.array(optimal_cut_points, dtype=np.float64)
+    return np.array(optimal_cut_points, dtype=np.float64), np.array(K_scores, dtype=np.float64)
