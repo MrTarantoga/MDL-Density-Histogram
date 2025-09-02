@@ -24,7 +24,7 @@ cdef double log_fac_by_Ramanujan(const unsigned long long n):
         result = term_1 + term_2 + term_3
         return result
 
-def quantize_data(double [:] x, double epsilon):
+def quantize_data(const double [:] x, const double epsilon):
     assert len(x) > 2, "The x must contain [2, inf)"
     assert epsilon > 0, "Epsilon must be positive"
 
@@ -38,7 +38,7 @@ def quantize_data(double [:] x, double epsilon):
        data_disc += [lower_bin]*number_bins
     return np.asarray(data_disc)
 
-def generate_candidate_cut_points(double [:] x, double epsilon):
+def generate_candidate_cut_points(const double [:] x, const double epsilon):
     """Generate candidate cut points between data points (Equation 22)"""
     assert len(x) > 2, "The x must contain [2, inf)"
     assert epsilon > 0, "Epsilon must be positive"
@@ -58,7 +58,7 @@ def generate_candidate_cut_points(double [:] x, double epsilon):
 
     return candidates
 
-cpdef unsigned long long[:] precompute_n_e(double [:] data, double [:] candidates):
+cpdef unsigned long long[:] precompute_n_e(const double [:] data, const double [:] candidates):
     """Precompute n_e: number of data points in [x_min, c_e] (Section 4)"""
     n_e = np.zeros(len(candidates), dtype=np.uint64)  # Include E+1
     cdef Py_ssize_t i, d
@@ -71,7 +71,7 @@ cpdef unsigned long long[:] precompute_n_e(double [:] data, double [:] candidate
                 n_e[i] += 1
     return n_e
 
-cdef double compute_parametric_complexity(unsigned long long n, unsigned long long K):
+cdef double compute_parametric_complexity(const unsigned long long n, const unsigned long long K):
     cdef double R_prev2 = 1.0  # R_n_h(K-2)
     cdef double R_current = 0.0  # R_n_h(K)
     cdef double R_prev1 = 0.0  # R_n_h(K-1)
@@ -109,12 +109,12 @@ cdef double compute_parametric_complexity(unsigned long long n, unsigned long lo
 
     return R_current
 
-cdef double dp_func_init(unsigned long long [:] n_e, 
-                         double [:] x, 
-                         unsigned long long n, 
-                         double [:] candidates, 
-                         unsigned long long e, 
-                         double epsilon):
+cdef double dp_func_init(const unsigned long long [:] n_e, 
+                         const double [:] x, 
+                         const unsigned long long n, 
+                         const double [:] candidates, 
+                         const unsigned long long e, 
+                         const double epsilon):
     cdef double term1, term2, best_score, candidates_val, x_min
     cdef unsigned long long n_e_val = <unsigned long long>n_e[e]
 
@@ -129,10 +129,10 @@ cdef double dp_func_init(unsigned long long [:] n_e,
     else:
         return 0.0
 
-cdef tuple dp_func(unsigned long long [:] n_e, 
-                   double [:] x, 
+cdef tuple dp_func(const unsigned long long [:] n_e, 
+                   const double [:] x, 
                    const unsigned long long n, 
-                   double [:] candidates, 
+                   const double [:] candidates, 
                    const unsigned long long K, 
                    const unsigned long long E, 
                    const unsigned long long e, 
@@ -182,12 +182,11 @@ cdef tuple dp_func(unsigned long long [:] n_e,
 
 
 
-def mdl_optimal_histogram(double [:] data, 
-                          double epsilon=0.1, 
-                          unsigned long long K_max=10):
-    cdef double[:] data_view = data
+def mdl_optimal_histogram(const double [:] data, 
+                          const double epsilon=0.1, 
+                          const unsigned long long K_max=10):
     cdef double[:] K_scores
-    cdef unsigned long long n = data_view.shape[0]
+    cdef unsigned long long n = data.shape[0]
     cdef unsigned long long i
     cdef unsigned long long K, e, K_best, e_pos,
     cdef double[:] candidates
