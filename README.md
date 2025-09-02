@@ -11,6 +11,7 @@ This package provides a Cython-accelerated implementation of the **Minimum Descr
 ## Features
 - **MDL Principle**: Uses stochastic complexity for model selection
 - **Dynamic Programming**: Efficient O(E²·K_max) optimization (cache parametric complexity computation, speed up)
+- **Score of each *K*th bin**: The score of each bin is returned to understand the performance of different properties of the same dataset.
 - **Variable-Width Bins**: Adapts to data density variations
 - **Automatic Bin Count**: No manual parameter tuning required (except maximum bin count to consider $K_{max}$ and data resolution $\epsilon$)
 - **Cython Acceleration**: Critical operations compiled to C
@@ -41,7 +42,10 @@ from mdl_density_hist import mdl_optimal_histogram
 data = np.random.normal(0, 1, 1000)
 
 # Compute optimal histogram
-cut_points = mdl_optimal_histogram(data, epsilon=0.1)
+cut_points, K_scores = mdl_optimal_histogram(data, epsilon=0.1)
+
+# Print score of each bin
+print(f"K_scores: {K_scores}")
 
 # Visualize result
 import matplotlib.pyplot as plt
@@ -82,7 +86,5 @@ src/
 - Memory-optimized array operations via NumPy
 - Candidate cut point pruning for reduced search space
 
-## Future Work
-- Add visualization tools for complexity curves
 
 For implementation details, see the [paper](https://proceedings.mlr.press/v2/kontkanen07a/kontkanen07a.pdf) and inline code comments.
