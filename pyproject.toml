@@ -15,7 +15,7 @@ maintainers = [
 ]
 license = {text = "Apache-2.0"}
 readme = "README.md"
-  
+
 [project.urls]
 Repository = "https://github.com/MrTarantoga/MDL-Density-Histogram"
 
