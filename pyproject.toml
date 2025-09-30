@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MDL-Density-Histogram"
-version = "1.1.0"
+version = "1.1.1"
 requires-python = ">= 3.11"
 description = "Cython-accelerated MDL histogram density estimation with dynamic programming, implementing Kontkanen & Myllymaki's algorithm (JMLR 2007)."
 authors = [
