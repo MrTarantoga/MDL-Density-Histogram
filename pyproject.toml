@@ -33,3 +33,13 @@ where = ["src"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.cibuildwheel.linux.environment]
+CFLAGS = "-O3 -funroll-loops -flto -ftree-vectorize"
+
+[tool.cibuildwheel.macos.environment]
+CFLAGS = "-O3 -funroll-loops -flto -ftree-vectorize"
+
+[tool.cibuildwheel.windows.environment]
+# Use /O2 instead of -O3 for MSVC; /GL enables link-time optimization
+CFLAGS = "/O2 /GL"
