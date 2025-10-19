@@ -24,9 +24,9 @@ jobs:
         with:
           lfs: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.2.0
+        uses: pypa/cibuildwheel@v3.2.1
         env:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests -n auto"
           CIBW_SKIP: >-
-            cp38-* cp39-* cp310-* cp314-* cp314t-* *win32*
+            cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
