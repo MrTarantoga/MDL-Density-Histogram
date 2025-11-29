@@ -22,9 +22,8 @@ jobs:
         with:
           lfs: true
       - name: Install Visual Studio Build Tools
-        run: choco install visualstudio2019buildtools
-      - name: Set CMake generator
-        run: set CMAKE_GENERATOR=Ninja
+        run: |
+          choco install visualstudio2017buildtools
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.3.0
         env:
