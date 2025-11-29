@@ -31,19 +31,18 @@ jobs:
           CIBW_SKIP: >-
             cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
 
-
-build_wheels_without_test:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-11-arm, macos-latest]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v3.3.0
-        env:
-          CIBW_SKIP: >-
-            cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
+  build_wheels_without_test:
+      name: Build wheels on ${{ matrix.os }}
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os: [windows-11-arm, macos-latest]
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            lfs: true
+        - name: Build wheels
+          uses: pypa/cibuildwheel@v3.3.0
+          env:
+            CIBW_SKIP: >-
+              cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
