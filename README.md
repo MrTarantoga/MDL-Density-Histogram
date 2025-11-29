@@ -1,7 +1,6 @@
 [![Upload Python Package](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-publish.yml/badge.svg?event=release)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-publish.yml)
 [![Python application test](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app.yml/badge.svg)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app.yml)
-[![Python application bad runner for macos-latest](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app-bad-runner-macos-latest-arm.yml/badge.svg)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app-bad-runner-macos-latest-arm.yml)
-[![Python application bad runner for windows-11-arm](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app-bad-runner-windows-11-arm.yml/badge.svg)](https://github.com/MrTarantoga/MDL-Density-Histogram/actions/workflows/python-app-bad-runner-windows-11-arm.yml)
+
 # MDL Optimal Histogram Density Estimation
 
 This package provides a Cython-accelerated implementation of the **Minimum Description Length (MDL) optimal histogram density estimation** algorithm from Kontkanen & Myllymaki (2007). It uses information-theoretic principles to automatically determine optimal variable-width bins for density estimation.
