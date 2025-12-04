@@ -58,11 +58,29 @@ jobs:
             name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
             path: wheelhouse/
 
+  make_sdist:
+    name: Make SDist
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0  # Optional, use if you use setuptools_scm
+        submodules: true  # Optional, use if you have submodules
+
+    - name: Build SDist
+      run: pipx run build --sdist
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: cibw-sdist
+        path: dist/*.tar.gz
+
   pypi-publish:
     runs-on: ubuntu-latest
     needs:
       - build_wheels_with_test
       - build_wheels_without_test
+      - make_sdist
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
