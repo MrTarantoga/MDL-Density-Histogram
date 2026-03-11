@@ -23,17 +23,17 @@ jobs:
       matrix:
         os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-15-intel]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           lfs: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.3.1
+        uses: pypa/cibuildwheel@v3.4.0
         env:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests -n auto"
           CIBW_SKIP: >-
             cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: wheelhouse/
@@ -45,15 +45,15 @@ jobs:
         matrix:
           os: [windows-11-arm, macos-latest]
       steps:
-        - uses: actions/checkout@v5
+        - uses: actions/checkout@v6
           with:
             lfs: true
         - name: Build wheels
-          uses: pypa/cibuildwheel@v3.3.1
+          uses: pypa/cibuildwheel@v3.4.0
           env:
             CIBW_SKIP: >-
               cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
-        - uses: actions/upload-artifact@v5
+        - uses: actions/upload-artifact@v7
           with:
             name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
             path: wheelhouse/
@@ -62,7 +62,7 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
         submodules: true  # Optional, use if you have submodules
@@ -70,7 +70,7 @@ jobs:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v5
+    - uses: actions/upload-artifact@v7
       with:
         name: cibw-sdist
         path: dist/*.tar.gz
@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: Retrieve release distributions
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           pattern: cibw-*
           path: wheelhouse
