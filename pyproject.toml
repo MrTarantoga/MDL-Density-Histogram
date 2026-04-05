@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "cython", "wheel", "numpy"]
+requires = ["setuptools", "cython", "wheel", "numpy>2.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,14 +10,32 @@ description = "Cython-accelerated MDL histogram density estimation with dynamic 
 authors = [
     {name = "Götz Grimmer", email = "goetz-dev@web.de"}
 ]
-maintainers = [
-    {name = "Götz Grimmer", email = "goetz-dev@web.de"}
+dependencies = [
+    "numpy>2.1"
 ]
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 readme = "README.md"
 
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Cython",
+    "Operating System :: OS Independent"
+]
+
+
 [project.urls]
+Homepage = "https://github.com/MrTarantoga/MDL-Density-Histogram"
 Repository = "https://github.com/MrTarantoga/MDL-Density-Histogram"
+Issues = "https://github.com/MrTarantoga/MDL-Density-Histogram/issues"
 
 [project.optional-dependencies]
 tests = [
@@ -28,11 +46,15 @@ tests = [
     "brotli"
 ]
 
+[tool.setuptools.package-dir]
+"" = "src"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
+# Optional but recommended if you ship Cython extensions
 [tool.setuptools]
-package-dir = {"" = "src"}
+include-package-data = true
 
 [tool.cibuildwheel.linux.environment]
 CFLAGS = "-O3 -funroll-loops -flto -ftree-vectorize"
@@ -41,5 +63,4 @@ CFLAGS = "-O3 -funroll-loops -flto -ftree-vectorize"
 CFLAGS = "-O3 -funroll-loops -flto -ftree-vectorize"
 
 [tool.cibuildwheel.windows.environment]
-# Use /O2 instead of -O3 for MSVC; /GL enables link-time optimization
 CFLAGS = "/O2 /GL"
