@@ -27,7 +27,7 @@ jobs:
         with:
           lfs: true
       - name: Build wheels
-        uses: pypa/wheel@0.47.0
+        uses: pypa/cibuildwheel@v3.4.1
         env:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests -n auto"
