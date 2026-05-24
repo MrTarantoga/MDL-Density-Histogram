@@ -27,13 +27,13 @@ jobs:
         with:
           lfs: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.4.1
+        uses: pypa/cibuildwheel@v4
         env:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests -n auto"
           CIBW_SKIP: >-
             cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v8
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: wheelhouse/
@@ -49,11 +49,11 @@ jobs:
           with:
             lfs: true
         - name: Build wheels
-          uses: pypa/cibuildwheel@v3.4.1
+          uses: pypa/cibuildwheel@v4
           env:
             CIBW_SKIP: >-
               cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
-        - uses: actions/upload-artifact@v7
+        - uses: actions/upload-artifact@v8
           with:
             name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
             path: wheelhouse/
@@ -70,7 +70,7 @@ jobs:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v7
+    - uses: actions/upload-artifact@v8
       with:
         name: cibw-sdist
         path: dist/*.tar.gz
@@ -105,6 +105,6 @@ jobs:
           merge-multiple: true
 
       - name: Publish release distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1
         with:
           packages-dir: wheelhouse/
