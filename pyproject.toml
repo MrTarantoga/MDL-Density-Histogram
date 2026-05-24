@@ -1,9 +1,9 @@
 [build-system]
 requires = [
-    "setuptools==82.0.1", 
-    "Cython==3.2.5", 
-    "wheel==0.47.0", 
-    "numpy==2.4.6"
+    "setuptools>=82,<83",
+    "Cython>=3.2,<3.3",
+    "wheel>=0.47,<0.48",
+    "numpy>=2.4,<3"
 ]
 build-backend = "setuptools.build_meta"
 
@@ -16,7 +16,7 @@ authors = [
     {name = "Götz Grimmer", email = "goetz-dev@web.de"}
 ]
 dependencies = [
-    "numpy>2.2"
+    "numpy>=2.2,<3"
 ]
 license = "Apache-2.0"
 readme = "README.md"
@@ -43,11 +43,11 @@ Issues = "https://github.com/MrTarantoga/MDL-Density-Histogram/issues"
 
 [project.optional-dependencies]
 tests = [
-    "pytest==9.0.3",
-    "pytest-xdist==3.8.0",
-    "pandas==3.0.3",
-    "pyarrow==24.0.0",
-    "brotli==1.2.0"
+    "pytest>=9,<10",
+    "pytest-xdist>=3.8,<4",
+    "pandas>=3,<4",
+    "pyarrow>=24,<25",
+    "brotli>=1.2,<2"
 ]
 
 [tool.setuptools.package-dir]
