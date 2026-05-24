@@ -42,7 +42,7 @@ jobs:
           with:
             lfs: true
         - name: Build wheels
-          uses: pypa/cibuildwheel@vS3.4.1
+          uses: pypa/cibuildwheel@v3.4.1
           env:
             CIBW_SKIP: >-
               cp38-* cp39-* cp310-* cp315-* cp315t-* *win32*
