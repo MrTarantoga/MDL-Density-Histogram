@@ -46,7 +46,7 @@ tests = [
     "pytest>=9,<10",
     "pytest-xdist>=3.8,<4",
     "pandas>=3,<4",
-    "pyarrow>=24,<25",
+    "pyarrow>=24,<26",
     "brotli>=1.2,<2"
 ]
 
