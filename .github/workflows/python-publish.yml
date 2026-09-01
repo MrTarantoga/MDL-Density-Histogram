@@ -32,7 +32,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-xdist pandas pyarrow brotli meson cmake ninja
           CIBW_TEST_COMMAND: "pytest {project}/tests -n auto"
           CIBW_SKIP: >-
-            cp39-* cp310-* *win32*
+            cp39-* cp310-* cp315* *win32*
       - uses: actions/upload-artifact@v7
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
@@ -52,7 +52,7 @@ jobs:
           uses: pypa/cibuildwheel@v4.2.0
           env:
             CIBW_SKIP: >-
-              cp39-* cp310-* *win32*
+              cp39-* cp310-* cp315* *win32*
         - uses: actions/upload-artifact@v7
           with:
             name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
